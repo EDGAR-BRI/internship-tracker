@@ -1,9 +1,16 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
-import { BaseModel, beforeSave, column, computed } from '@adonisjs/lucid/orm'
+import { BaseModel, column, computed } from '@adonisjs/lucid/orm'
 import { type AccessToken, DbAccessTokensProvider } from '@adonisjs/auth/access_tokens'
+import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
+import type { HashManager } from '@adonisjs/core/hash'
 
-export default class User extends BaseModel {
+const AuthFinder = withAuthFinder(hash as unknown as HashManager<any>, {
+  uids: ['email'],
+  passwordColumnName: 'password',
+})
+
+export default class User extends AuthFinder(BaseModel) {
   static accessTokens = DbAccessTokensProvider.forModel(User)
   declare currentAccessToken?: AccessToken
 
@@ -17,6 +24,12 @@ export default class User extends BaseModel {
   declare email: string
 
   @column({ serializeAs: null })
+  declare provider: string | null
+
+  @column({ serializeAs: null })
+  declare providerId: string | null
+
+  @column({ serializeAs: null })
   declare password: string
 
   @column.dateTime({ autoCreate: true })
@@ -27,19 +40,10 @@ export default class User extends BaseModel {
 
   @computed()
   get initials() {
-    const [first, last] = this.fullName
-      ? this.fullName.split(' ')
-      : this.email.split('@')
+    const [first, last] = this.fullName ? this.fullName.split(' ') : this.email.split('@')
     if (first && last) {
       return `${first.charAt(0)}${last.charAt(0)}`.toUpperCase()
     }
     return first.slice(0, 2).toUpperCase()
-  }
-
-  @beforeSave()
-  static async hashPassword(user: User) {
-    if (user.$dirty.password) {
-      user.password = await hash.make(user.password)
-    }
   }
 }
