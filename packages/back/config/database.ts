@@ -39,7 +39,7 @@ const dbConfig = defineConfig({
         /**
          * Enable schema generation from Lucid models.
          */
-        enabled: true,
+        enabled: false,
 
         /**
          * Custom schema rules file paths.
