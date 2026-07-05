@@ -1,0 +1,45 @@
+# Labels para Issues y PRs
+
+- name: bug
+  color: d73a4a
+  description: Algo no funciona correctamente
+
+- name: enhancement
+  color: a2eeef
+  description: Nueva funcionalidad o mejora
+
+- name: task
+  color: 0075ca
+  description: Tarea de pasantía
+
+- name: documentation
+  color: 0075ca
+  description: Mejora en documentación
+
+- name: good first issue
+  color: 7057ff
+  description: Buen primer issue para comenzar
+
+- name: priority: high
+  color: b60205
+  description: Alta prioridad
+
+- name: priority: low
+  color: fbca04
+  description: Baja prioridad
+
+- name: help wanted
+  color: 008672
+  description: Se necesita ayuda
+
+- name: question
+  color: d876e3
+  description: Pregunta o discusión
+
+- name: wontfix
+  color: ffffff
+  description: No se va a corregir
+
+- name: duplicate
+  color: cfd3d7
+  description: Issue o PR duplicado
