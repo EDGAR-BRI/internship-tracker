@@ -17,25 +17,16 @@ export default class Task extends BaseModel {
   declare status: string
 
   @column()
+  declare priority: string
+
+  @column.date()
+  declare dueDate: DateTime | null
+
+  @column()
   declare userId: number
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
-
-  @column()
-  declare startedAt: DateTime
-
-  @column()
-  declare completedAt: DateTime
-
-  @column()
-  declare theory: string | null
-
-  @column()
-  declare attitudes: string | null
-
-  @column()
-  declare resources: string | null
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   declare updatedAt: DateTime
