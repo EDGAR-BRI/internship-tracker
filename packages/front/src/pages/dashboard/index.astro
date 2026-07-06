@@ -1,18 +1,10 @@
 ---
 import AuthLayout from '../../layouts/AuthLayout.astro'
+import GoogleCallbackHandler from '../../components/GoogleCallbackHandler.vue'
+import TaskList from '../../components/TaskList.vue'
 ---
 
 <AuthLayout title="Dashboard - Internship Tracker">
-  <div class="space-y-6">
-    <div class="flex items-center justify-between">
-      <h1 class="text-2xl font-semibold tracking-tight">Dashboard</h1>
-      <span class="text-text-muted text-sm">Pendiente: agregar módulo de tareas</span>
-    </div>
-
-    <div class="bg-surface border border-border rounded-lg p-6">
-      <p class="text-text-secondary">
-        Bienvenido al dashboard. Próximamente se agregará el módulo de tareas.
-      </p>
-    </div>
-  </div>
+  <GoogleCallbackHandler client:load />
+  <TaskList client:load />
 </AuthLayout>

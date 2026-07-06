@@ -10,7 +10,7 @@ export default class GoogleAuthController {
     const provider = ally.use('google')
 
     if (provider.hasError()) {
-      return response.badRequest({ error: provider.getError() })
+      return response.redirect(`http://localhost:5173/login?error=${provider.getError()}`)
     }
 
     const googleUser = await provider.user()
@@ -37,13 +37,16 @@ export default class GoogleAuthController {
 
     const token = await User.accessTokens.create(user)
 
-    return {
-      user: {
+    const userData = encodeURIComponent(
+      JSON.stringify({
         id: user.id,
         fullName: user.fullName,
         email: user.email,
-      },
-      token: token.value!.release(),
-    }
+      })
+    )
+
+    return response.redirect(
+      `http://localhost:5173/dashboard?token=${token.value!.release()}&user=${userData}`
+    )
   }
 }

@@ -11,6 +11,14 @@ export default defineConfig({
   integrations: [vue()],
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      fs: {
+        allow: [
+          '/mnt/datos/dev/proyects/internships',
+          '/mnt/datos/dev/proyects/internships/node_modules',
+        ],
+      },
+    },
   },
   server: { port: 5173 },
 })
