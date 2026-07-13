@@ -47,5 +47,15 @@ router
       .prefix('log-entries')
       .as('logEntries')
       .use(middleware.auth())
+
+    router
+      .group(() => {
+        router.get('/', [controllers.Attendances, 'index'])
+        router.post('check-in', [controllers.Attendances, 'checkIn'])
+        router.post('check-out', [controllers.Attendances, 'checkOut'])
+      })
+      .prefix('attendances')
+      .as('attendances')
+      .use(middleware.auth())
   })
   .prefix('/api/v1')
