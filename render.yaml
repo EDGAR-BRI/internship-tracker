@@ -1,0 +1,44 @@
+services:
+  # Backend API Service
+  - type: web
+    name: internship-tracker-api
+    runtime: node
+    rootDir: packages/back
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: sh start.sh
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 3333
+      - key: HOST
+        value: 0.0.0.0
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        sync: false
+      - key: SESSION_DRIVER
+        value: cookie
+      - key: LOG_LEVEL
+        value: info
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        sync: false
+      - key: GOOGLE_CALLBACK_URL
+        sync: false
+
+  # Frontend Static Site
+  - type: web
+    name: internship-tracker-frontend
+    runtime: node
+    rootDir: packages/front
+    buildCommand: pnpm install --frozen-lockfile && pnpm build
+    startCommand: node dist/server/entry.mjs
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PUBLIC_API_URL
+        sync: false
