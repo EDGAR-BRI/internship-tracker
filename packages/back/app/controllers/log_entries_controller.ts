@@ -29,7 +29,10 @@ export default class LogEntriesController {
 
   async show({ params, auth, serialize }: HttpContext) {
     const user = auth.getUserOrFail()
-    const logEntry = await LogEntry.query().where('id', params.id).where('userId', user.id).firstOrFail()
+    const logEntry = await LogEntry.query()
+      .where('id', params.id)
+      .where('userId', user.id)
+      .firstOrFail()
 
     return serialize({
       logEntry: LogEntryTransformer.transform(logEntry),
@@ -38,7 +41,10 @@ export default class LogEntriesController {
 
   async update({ params, request, auth, serialize }: HttpContext) {
     const user = auth.getUserOrFail()
-    const logEntry = await LogEntry.query().where('id', params.id).where('userId', user.id).firstOrFail()
+    const logEntry = await LogEntry.query()
+      .where('id', params.id)
+      .where('userId', user.id)
+      .firstOrFail()
 
     const data = await request.validateUsing(updateLogEntryValidator)
     logEntry.merge(data)
@@ -51,7 +57,10 @@ export default class LogEntriesController {
 
   async destroy({ params, auth, response }: HttpContext) {
     const user = auth.getUserOrFail()
-    const logEntry = await LogEntry.query().where('id', params.id).where('userId', user.id).firstOrFail()
+    const logEntry = await LogEntry.query()
+      .where('id', params.id)
+      .where('userId', user.id)
+      .firstOrFail()
 
     await logEntry.delete()
 
