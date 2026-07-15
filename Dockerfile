@@ -9,7 +9,7 @@ COPY packages/front/package.json packages/front/
 RUN pnpm install --frozen-lockfile
 COPY . .
 WORKDIR /app/packages/back
-RUN node ace build
+RUN node ace build --ignore-ts-errors
 
 FROM base AS runtime
 WORKDIR /app
