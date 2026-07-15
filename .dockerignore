@@ -16,4 +16,6 @@ tests/
 .prettierignore
 .eslint*
 .prettierrc*
-packages/front/
+packages/front/node_modules/
+packages/front/.astro/
+packages/front/dist/

@@ -7,8 +7,7 @@ COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 COPY packages/back/package.json packages/back/
 COPY packages/front/package.json packages/front/
 RUN pnpm install --frozen-lockfile
-COPY packages/back/ packages/back/
-COPY packages/front/ packages/front/
+COPY . .
 WORKDIR /app/packages/back
 RUN node ace build
 
