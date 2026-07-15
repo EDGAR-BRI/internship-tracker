@@ -17,5 +17,4 @@ tests/
 .eslint*
 .prettierrc*
 packages/front/
-pnpm-lock.yaml
 pnpm-workspace.yaml
