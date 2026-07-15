@@ -3,7 +3,7 @@ RUN corepack enable && corepack prepare pnpm@latest --activate
 
 FROM base AS builder
 WORKDIR /app
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY package.json pnpm-lock.yaml ./
 COPY packages/back/package.json packages/back/
 RUN pnpm install --frozen-lockfile
 COPY packages/back/ packages/back/
