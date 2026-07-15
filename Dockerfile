@@ -3,9 +3,10 @@ FROM node:24-alpine AS base
 FROM base AS builder
 WORKDIR /app
 COPY packages/back/package.json ./
-RUN npm install --omit=dev
+RUN npm install
 COPY packages/back/ .
 RUN node ace build --ignore-ts-errors
+RUN npm prune --omit=dev
 
 FROM base AS runtime
 WORKDIR /app
